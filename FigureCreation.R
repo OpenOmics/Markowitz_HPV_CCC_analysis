@@ -6,6 +6,9 @@ library(karyoploteR)
 
 # Bed file used here was all peaks from SM159_1000000_noYM_mhic_output_table_HPVsig.txt
 # and SM163_1000000_noYM_mhic_output_table_HPVsig.txt
+# Sources:
+#   https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM8896999
+#   https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM8897000
 
 a <- read.table("sigHPV_noYM_1Mb.bed")
 names(a) <- c("chr","start","end","name","score")
@@ -24,7 +27,6 @@ library(GenomicRanges)
 library(BSgenome.Hsapiens.UCSC.hg38)
 library(ggplot2)
 
-# only want the three 9E viewpoint mean files with S14 included
 allFiles <- list.files(pattern="bedgraph")
 allData <- lapply(allFiles,rtracklayer::import)
 
@@ -61,6 +63,11 @@ ggplot(data = M1corrM, aes(x=Var1, y=Var2, fill=value)) +
 library(circlize)
 library(GenomicRanges)
 
+# Sources
+#    https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM8896992
+#    https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM8896993
+#    https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM8896994
+
 bdg6E <- "6E_viewpoint3.50kb.mean.bedgraph"
 bdg <- rtracklayer::import(bdg6E)
 seqlevels(bdg) <- gsub("chr","",seqlevels(bdg))
@@ -92,6 +99,12 @@ bdg2 <- data.frame(bdg)[,c(1,2,3,6)]
 library(circlize)
 library(GenomicRanges)
 library(regioneR) # to convert data.frame to gRanges
+
+# Sources
+#    https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM8896995 
+#    https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM8896996
+#    https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM8896997
+#    https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM8896998
 
 chrLen <- read.table("hg38.HPV.sizes",sep="\t")
 chrLen2 <- data.frame(chr=chrLen$V1, start=1, end=chrLen$V2)
@@ -138,6 +151,12 @@ circos.genomicLabels(geneList, labels.column = 4, side = "inside")
 
 library(circlize)
 library(GenomicRanges)
+
+# Sources:
+#    S1 Table. Significant HPV31 trans-interactions mapped in CIN612-9E cells by HiC (mhic_sigHPVtrans_hg38_FINAL.bed)
+#    S6 Table. HPV31 4C consensus peaks defined in CIN612-9E cells (9Evp3_tem_50kb_inMost.FIXED.bed)
+#    S8 Table. Super-enhancers profiled in W12 HPV16-positive cervical keratinocytes [Warburton, 2021]
+#    S10 Table. Integration hotspots defined in CESC [Warburton, 2021]
 
 CESC <- rtracklayer::import("Final CESC hotspots_hg38_LiftOver.bed")
 seqlevels(CESC) <- gsub("chr","",seqlevels(CESC))
@@ -202,6 +221,11 @@ library(GenomicRanges)
 library(rtracklayer)
 library(ggplot2)
 library(EnrichedHeatmap)
+
+# Sources:
+#   NHEK DSBCapture BREAK-seq (GSM2068755 and GSM2068756) 
+#   20863 H3K27ac ChIP-seq (GSM5550313 and GSM5550314)
+#   9E ATAC-seq (GSM8898200 and GSM8898201)
 
 bws <- c("BREAK_n12_avg.bw", "G1.avg.genrich.RPM.bw", "H3K27ac_20863.avg.Q5DD.RPGC.inputnorm.bw")
 bwNames <- c("BREAK", "ATAC", "H3K27ac")
