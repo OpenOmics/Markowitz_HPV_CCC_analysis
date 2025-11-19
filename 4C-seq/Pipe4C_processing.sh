@@ -1,6 +1,28 @@
-# Prepare files for BSGENOME:
+# REFERENCE FILE CREATION AND PIPE4C RUN
+#
+# This script:
+#   1) Downloads GRCh38.p12 and prepares an hg38+HPV31 reference FASTA
+#   2) Prepares files needed for the BSgenome hg38+HPV31 package
+#   3) (BSgenome build and bowtie2 index commands are run in the middle section)
+#   4) Runs pipe4C on vp_ecoRI_R1.txt and vp_ecoRI_R2.txt using raw 4C FASTQs
+#
+# Requirements:
+#   - wget
+#   - samtools
+#   - python
+#   - R + pipe4C (Bioconductor)
+#   - bowtie2
+
+##############
+
+# REFERENCE FILE CREATION FOR PIPE4C / BSGENOME
+
 cd references
 mkdir hg38_hpv31_bsgenome
+
+module load samtools/1.17
+module load python
+
 wget ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_28/GRCh38.p12.genome.fa.gz
 gzip -d GRCh38.p12.genome.fa.gz
 samtools faidx GRCh38.p12.genome.fa
@@ -9,7 +31,10 @@ python splitRef.py GRCh38.p12.genome.fa
 mv GRCh38.p12.genome.fa ..
 
 cp ../HPV31REF_PP706107.fa chrHPV31.fa
-### manually changed the header to chrHPV31.fa
+# Ensure the FASTA header of chrHPV31.fa is "chrHPV31" (required by hg38_hpv31_seed.txt).
+# For example, you can run (uncomment if desired):
+# sed -i '1s/.*/>chrHPV31/' chrHPV31.fa
+
 cd ..
 
 ##############
@@ -49,12 +74,17 @@ module load R/4.4.0
 module load bowtie/2-2.5.1
 module load samtools/1.17
 
+# Folder containing the raw 4C FASTQs referenced in vp_ecoRI_R1.txt and vp_ecoRI_R2.txt
+DIRFQ=/path/to/4C_fastqs   # EDIT: set to your 4C FASTQ directory
+
 VPFILE=vp_ecoRI_R1.txt
 OUTDIR=pipe4c_ecoRI_R1
 
+# NOTE: pipe4C/pipe4C.R is part of the external pipe4C package (Bioconductor).
+#       Install pipe4C and update this path if needed.
 Rscript pipe4C/pipe4C.R -o $OUTDIR --vpFile=$VPFILE --fqFolder=$DIRFQ
 
 VPFILE=vp_ecoRI_R2.txt
-OUTDIR=/data/NCBR/projects/NCBR-364/pipe4c_ecoRI_R2
+OUTDIR=pipe4c_ecoRI_R2   # EDIT: change if you want a different output directory
 
 Rscript pipe4C/pipe4C.R -o $OUTDIR --vpFile=$VPFILE --fqFolder=$DIRFQ

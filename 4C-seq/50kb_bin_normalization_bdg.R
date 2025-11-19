@@ -1,3 +1,18 @@
+# Usage:
+#   Run from the project root (or adjust paths) after pipe4C has generated
+#   per-sample RDS files in:
+#     pipe4c_ecoRI_R1/RDS/*.rds
+#     pipe4c_ecoRI_R2/RDS/*.rds
+#
+#   Output:
+#     One 50 kb bedGraph per unique 4C sample:
+#       <sample>.50kb.bedGraph
+#     in the current working directory.
+#
+# Requirements:
+#   - R + packages: GenomicRanges, BSgenome.Hsapiens.UCSC.hg38, rtracklayer
+#   - The combined hg38+HPV31 BSgenome is NOT required here; only hg38.
+
 library(GenomicRanges)
 library(BSgenome.Hsapiens.UCSC.hg38)
 

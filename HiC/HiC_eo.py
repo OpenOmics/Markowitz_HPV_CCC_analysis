@@ -1,6 +1,14 @@
-# Used to create Figures 1B and 1C
-
 """
+# HiC_eo.py
+# Used to create chromosome-association preference heatmaps for
+# Figures 1B and 1C in Warburton et al. (2025).
+#
+# Input:  SM159.transValidPairs (trans-only allValidPairs from HiC-Pro)
+# Output: SM159.transValidPairs.summary.txt
+#         SM159_chrAssnPref_noYM.pdf
+#
+# To run for SM163, change "SM159" to "SM163" in the filenames below.
+
 Based upon: Moquin SA et al. 2018. The Epstein-Barr Virus Episome 
 Maneuvers between Nuclear Chromatin Compartments during Reactivation. 
 Journal of Virology 92(3): e01413-17.

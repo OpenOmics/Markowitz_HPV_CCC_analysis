@@ -1,3 +1,27 @@
+############################################################
+# HiC_transInteractions_ABcalls.R
+#
+# Purpose:
+#   Call trans interactions (HPV31-focused) with MHiC and
+#   compute A/B compartments from Hi-C matrices using HiTC.
+#
+# Usage:
+#   source("HiC_transInteractions_ABcalls.R")
+#   rmYM("SM159_1000000"); mhic_run("SM159_1000000_noYM", 1000000)
+#   # see script end for example TxDb and HiTC calls.
+#
+# Inputs:
+#   HiC-Pro .matrix and _abs.bed files at given resolution,
+#   hg38.fa.sizes and genes_protein_coding.gtf (for TxDb).
+#
+# Outputs:
+#   *_mhic_output_table_*.txt and SMC*_ABcalls_per500kb.txt.
+#
+# Requirements:
+#   R, MHiC, HiTC, GenomicFeatures, AnnotationDbi, data.table.
+############################################################
+
+
 # MHiC version 0.5.0 (R/3.6.1)
 
 mhic_run <- function(root, res) {
@@ -120,7 +144,7 @@ for (i in 1:length(Idx)) {
 pcB <- lapply(pc, function(x) {x$PC1})
 pcC <- do.call("c",pcB)
 
-write.table(data.frame(pcC),"SMC159_ABcalls_per500kb.txt",quote=F,sep="\t")
+write.table(data.frame(pcC),"SM159_ABcalls_per500kb.txt",quote=F,sep="\t")
 
 ###
 
@@ -136,7 +160,7 @@ for (i in 1:length(Idx)) {
 pcB <- lapply(pc, function(x) {x$PC1})
 pcC <- do.call("c",pcB)
 
-write.table(data.frame(pcC),"SMC163_ABcalls_per500kb.txt",quote=F,sep="\t")
+write.table(data.frame(pcC),"SM163_ABcalls_per500kb.txt",quote=F,sep="\t")
 
 
 

@@ -24,7 +24,7 @@ bowtie2-build hg38_basic_HPV31.genome.fa hg38_HPV31
 
 module load cutadapt/1.18
 
-SAMPLE="SMC159" # GSM8896999
+SAMPLE="SM159" # GSM8896999
 cutadapt --pair-filter=any --nextseq-trim=2 --trim-n -n 5 -O 5 -q 10,10 \
            -m 35:35 -b file:TruSeq_and_nextera_adapters.consolidated.fa \
            -B file:TruSeq_and_nextera_adapters.consolidated.fa -j 32 \
@@ -34,7 +34,7 @@ cutadapt --pair-filter=any --nextseq-trim=2 --trim-n -n 5 -O 5 -q 10,10 \
 pigz -p 32 $SAMPLE.R1.trim.fastq
 pigz -p 32 $SAMPLE.R2.trim.fastq
 
-SAMPLE="SMC163" # GSM8897000
+SAMPLE="SM163" # GSM8897000
 cutadapt --pair-filter=any --nextseq-trim=2 --trim-n -n 5 -O 5 -q 10,10 \
            -m 35:35 -b file:TruSeq_and_nextera_adapters.consolidated.fa \
            -B file:TruSeq_and_nextera_adapters.consolidated.fa -j 32 \
@@ -60,5 +60,5 @@ HiC-Pro -i HicPro -o HicPro_out -c hicpro_config.txt -s ice_norm
 
 # EXTRACTING TRANS VALID PAIRS
 
-awk '$2!=$5' <SM159.allValidPairs >> SM159.transValidPairs
-awk '$2!=$5' <SM163.allValidPairs >> SM163.transValidPairs
+awk '$2!=$5' <SM159.allValidPairs > SM159.transValidPairs
+awk '$2!=$5' <SM163.allValidPairs > SM163.transValidPairs

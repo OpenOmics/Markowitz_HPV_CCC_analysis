@@ -1,3 +1,16 @@
+# Usage:
+#   Run in a directory containing gzipped 50 kb bedGraph files:
+#     S9_6E_1_EcoRI_3.50kb.bedGraph.gz, ...
+#
+#   This script:
+#     - pools all samples to estimate a global mean,
+#     - computes Poisson p-values per bin (ppois, lower.tail=FALSE),
+#     - defines significant bins as -log10(p) > 5,
+#     - merges adjacent significant bins into regions >= 50 kb,
+#     - writes:
+#         <sample>.tem.50kb.bed
+#         <sample>.tem.50kb.ppois.bedgraph
+
 library(GenomicRanges)
 library(ggplot2)
 

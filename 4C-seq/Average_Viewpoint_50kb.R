@@ -1,3 +1,15 @@
+# Usage:
+#   Run in a directory containing per-sample 50 kb bedGraph files
+#   named like:
+#     <exp>_<cond>_<rep>_<digest>_<viewpoint>.50kb.bedGraph.gz
+#
+#   This script groups samples by experiment + viewpoint and writes:
+#     <condition>_viewpoint<VP>.50kb.mean.bedgraph
+#
+# Requirements:
+#   - R + packages: GenomicRanges, BSgenome.Hsapiens.UCSC.hg38, rtracklayer
+#   - Input bedGraphs should have a 'score' column with normalized read counts.
+
 library(GenomicRanges)
 library(BSgenome.Hsapiens.UCSC.hg38)
 
