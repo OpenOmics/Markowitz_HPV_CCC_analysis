@@ -52,6 +52,7 @@ use SM159/SM163.
 These GEO accessions correspond to the 4C-seq datasets used in the manuscript
 to map HPV31–host chromatin interactions in CIN612-6E (integrated HPV31) and
 CIN612-9E (episomal HPV31) cells.
+
 ---
 
 ## 2. Software (high-level)
