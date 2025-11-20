@@ -40,9 +40,8 @@ wrapper or to reproduce every parameter used on the original cluster.
 - **SM159** – GSM8896999 (CIN612-9E Hi-C)  
 - **SM163** – GSM8897000 (CIN612-9E Hi-C)  
 
-In the manuscript these are referred to as **SMC159** and **SMC163**.  
-In the code and on GEO the prefixes are **SM159** and **SM163**; all filenames
-use SM159/SM163.
+In the manuscript SM159 and SM163 are referred to as Replicate 1 and Replicate 2, respectively.
+Originally, the samples were named SMC159 and SMC163. This nomencalture may still exist in this repo.
 
 ### 4C-seq
 
